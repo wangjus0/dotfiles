@@ -10,7 +10,7 @@ config.font = wezterm.font("MesloLGS Nerd Font")
 -- Cursor Blink Rate
 config.cursor_blink_rate = 0
 
-config.color_scheme = "Vs Code Dark+ (Gogh)"
+config.color_scheme = "Catppuccin Mocha"
 
 -- Gets rid of the title bar
 config.window_decorations = "RESIZE"

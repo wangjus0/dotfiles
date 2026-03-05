@@ -257,19 +257,36 @@ require("lazy").setup({
 
 	-- Color Scheme
 	{
-		"Mofiqul/vscode.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("vscode").setup({
-				style = "dark", -- dark | light
-				transparent = false,
-				italic_comments = true,
-				disable_nvimtree_bg = true,
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+				transparent_background = false,
+				term_colors = true,
+
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					treesitter = true,
+					telescope = true,
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+					},
+				},
 			})
 
-			vim.cmd.colorscheme("vscode")
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+
 	-- Harpoon
 	{
 		"ThePrimeagen/harpoon",
