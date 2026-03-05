@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Font Size
-config.font_size = 20.0
+config.font_size = 23.0
 
 -- Font Family
 config.font = wezterm.font("MesloLGS Nerd Font")
