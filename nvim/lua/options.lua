@@ -38,3 +38,6 @@ vim.opt.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 	command = "checktime",
 })
+
+-- Status line
+vim.opt.statusline = "%t %m"

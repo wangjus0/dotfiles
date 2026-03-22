@@ -155,7 +155,7 @@ require("lazy").setup({
 			fzf.setup({
 				"fzf-vim",
 				files = {
-					find_opts = [[--type f --hidden --exclude .git --exclude node_modules --exclude .venv]],
+					find_opts = [[--type f --hidden --no-ignore --exclude .git --exclude node_modules --exclude .venv]],
 				},
 				grep = {
 					rg_opts = [[--color=always --hidden --smart-case --glob '!.git/*' --glob '!node_modules/*' --glob '!.venv/*']],
@@ -300,34 +300,6 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("diffview").setup({})
-		end,
-	},
-
-	-- Statusline
-	{
-		"ojroques/nvim-hardline",
-		config = function()
-			require("hardline").setup({
-				bufferline = false, -- disable bufferline
-				bufferline_settings = {
-					exclude_terminal = false, -- don't show terminal buffers in bufferline
-					show_index = false, -- show buffer indexes (not the actual buffer numbers) in bufferline
-				},
-				theme = "oxocarbon", -- change theme
-				sections = { -- define sections
-					{ class = "mode", item = require("hardline.parts.mode").get_item },
-					{ class = "high", item = require("hardline.parts.git").get_item, hide = 100 },
-					{ class = "med", item = require("hardline.parts.filename").get_item },
-					"%<",
-					{ class = "med", item = "%=" },
-					{ class = "low", item = require("hardline.parts.wordcount").get_item, hide = 100 },
-					{ class = "error", item = require("hardline.parts.lsp").get_error },
-					{ class = "warning", item = require("hardline.parts.lsp").get_warning },
-					{ class = "warning", item = require("hardline.parts.whitespace").get_item },
-					{ class = "high", item = require("hardline.parts.filetype").get_item, hide = 60 },
-					-- { class = "mode", item = require("hardline.parts.line").get_item },
-				},
-			})
 		end,
 	},
 })

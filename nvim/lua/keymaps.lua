@@ -38,19 +38,6 @@ vim.keymap.set("n", "<leader>e", function()
 	require("oil").open(vim.fn.expand("%:p:h"))
 end, { desc = "Open Oil (current file dir)" })
 
--- Telescope
--- vim.keymap.set("n", "<leader>pf", require("telescope.builtin").find_files, { -- Find files
--- 	desc = "[F]ind [F]iles",
--- })
---
--- vim.keymap.set("n", "<leader>pw", require("telescope.builtin").live_grep, { -- Search for words
--- 	desc = "[F]ind [W]ord",
--- })
---
--- vim.keymap.set("n", "<leader>gd", require("telescope.builtin").lsp_type_definitions, {
--- 	desc = "[G]o [D]efintiion",
--- })
-
 -- Harpoon
 local harpoon = require("harpoon")
 
@@ -80,15 +67,6 @@ vim.keymap.set("n", "t;", function()
 	harpoon:list():select(5)
 end)
 
--- Neotree
-
-vim.keymap.set("n", "<leader>lt", function()
-	require("neo-tree.command").execute({
-		toggle = true,
-		position = "float",
-	})
-end, { desc = "Toggle Neo-tree (float)" })
-
 -- Diffview
 
 vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>")
@@ -102,7 +80,6 @@ vim.keymap.set("n", "<leader>pw", fzf.live_grep_native, { desc = "[F]ind [W]ord"
 
 vim.keymap.set("n", "<leader>fb", fzf.git_branches, { desc = "[F]ind by Git [B]ranches" })
 vim.keymap.set("n", "<leader>fd", fzf.diagnostics_document, { desc = "[F]ind by Git [B]ranches" })
--- vim.keymap.set("n", "gd", fzf.lsp_definitions, { desc = "[G]oto [D]efinition" })
 
 vim.keymap.set("n", "gd", function()
 	require("fzf-lua").lsp_definitions({
