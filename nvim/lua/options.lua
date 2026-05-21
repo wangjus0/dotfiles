@@ -41,3 +41,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 
 -- Status line
 vim.opt.statusline = "%t %m"
+
+-- Keep inline diagnostics, but hide gutter signs for warnings/info/hints.
+vim.diagnostic.config({
+	signs = {
+		severity = vim.diagnostic.severity.ERROR,
+	},
+})
