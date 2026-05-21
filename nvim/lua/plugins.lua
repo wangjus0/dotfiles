@@ -13,7 +13,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
 require("lazy").setup({
 
 	-- Auto complete
@@ -175,6 +174,42 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Git signs
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			on_attach = function(bufnr)
+				local gitsigns = require("gitsigns")
+
+				local function map(mode, lhs, rhs, desc)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+				end
+
+				map("n", "<leader>gn", function()
+					gitsigns.nav_hunk("next", { target = "all" })
+				end, "Next git hunk")
+				map("n", "<leader>gN", function()
+					gitsigns.nav_hunk("prev", { target = "all" })
+				end, "Previous git hunk")
+
+				map("n", "<leader>gs", gitsigns.stage_hunk, "[g]it [s]tage/unstage")
+				map("n", "<leader>gr", gitsigns.reset_hunk, "[g]it [r]eject")
+				map("v", "<leader>gs", function()
+					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Stage selected git lines")
+
+				-- Git reset for selections
+				map("v", "<leader>gr", function()
+					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "[g]it [r]eset")
+
+				map("n", "<leader>gp", gitsigns.preview_hunk, "[g]it [p]review")
+				map("n", "<leader>gd", gitsigns.diffthis, "[g]it [d]iff")
+			end,
+		},
+	},
+
 	-- Auto Format
 	{
 		"stevearc/conform.nvim",
@@ -238,11 +273,11 @@ require("lazy").setup({
 			"TmuxNavigatorProcessList",
 		},
 		keys = {
-			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", desc = "Navigate left" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>", desc = "Navigate down" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>", desc = "Navigate up" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Navigate right" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", desc = "Navigate previous" },
 		},
 	},
 
@@ -255,35 +290,13 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Color Scheme
+	-- Color Theme
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"olimorris/onedarkpro.nvim",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha", -- latte, frappe, macchiato, mocha
-				transparent_background = false,
-				term_colors = true,
-
-				integrations = {
-					cmp = true,
-					gitsigns = true,
-					treesitter = true,
-					telescope = true,
-					native_lsp = {
-						enabled = true,
-						virtual_text = {
-							errors = { "italic" },
-							hints = { "italic" },
-							warnings = { "italic" },
-							information = { "italic" },
-						},
-					},
-				},
-			})
-
-			vim.cmd.colorscheme("catppuccin")
+			require("onedarkpro").setup()
+			vim.cmd.colorscheme("onedark_vivid")
 		end,
 	},
 
@@ -292,14 +305,5 @@ require("lazy").setup({
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-
-	-- Git diff viewer
-	{
-		"sindrets/diffview.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("diffview").setup({})
-		end,
 	},
 })
