@@ -67,11 +67,7 @@ vim.keymap.set("n", "t;", function()
 	harpoon:list():select(5)
 end)
 
--- Diffview
-
-vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>")
-vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>")
-
+-- Fuzzy Finder
 local fzf = require("fzf-lua")
 
 vim.keymap.set("n", "<leader>pf", fzf.files, { desc = "[F]ind [F]iles" })
@@ -87,4 +83,5 @@ vim.keymap.set("n", "gd", function()
 	})
 end, { desc = "Go to definition" })
 
+-- Misc
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Documentation" })
