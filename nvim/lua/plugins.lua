@@ -163,11 +163,11 @@ require("lazy").setup({
 			})
 
 			-- Keymaps
-			vim.keymap.set("n", "<leader>pf", fzf.files, { desc = "[F]ind [F]iles" })
+			vim.keymap.set("n", "<leader>pf", fzf.files, { desc = "[P]arse [F]iles" })
 
-			vim.keymap.set("n", "<leader>pw", fzf.live_grep_native, { desc = "[F]ind [W]ord" })
+			vim.keymap.set("n", "<leader>pw", fzf.live_grep_native, { desc = "[P]arse [W]ords" })
 
-			vim.keymap.set("n", "<leader>fb", fzf.git_branches, { desc = "[F]ind by Git [B]ranches" })
+			vim.keymap.set("n", "<leader>fs", fzf.git_status, { desc = "[F]ind Git [S]tatus" })
 			vim.keymap.set("n", "<leader>fd", fzf.diagnostics_document, { desc = "[F]ind [D]iagnostics" })
 			vim.keymap.set("n", "gd", fzf.lsp_definitions, { desc = "[G]oto [D]efinition" })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Documentation" })
@@ -205,7 +205,7 @@ require("lazy").setup({
 				end, "[g]it [r]eset")
 
 				map("n", "<leader>gp", gitsigns.preview_hunk, "[g]it [p]review")
-				map("n", "<leader>gd", gitsigns.diffthis, "[g]it [d]iff")
+				map("n", "<leader>od", gitsigns.diffthis, "[o]pen [d]iff")
 			end,
 		},
 	},
