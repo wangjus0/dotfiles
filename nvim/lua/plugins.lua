@@ -205,7 +205,20 @@ require("lazy").setup({
 				end, "[g]it [r]eset")
 
 				map("n", "<leader>gp", gitsigns.preview_hunk, "[g]it [p]review")
-				map("n", "<leader>od", gitsigns.diffthis, "[o]pen [d]iff")
+				map("n", "<leader>od", function()
+					for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+						local buf = vim.api.nvim_win_get_buf(win)
+						local name = vim.api.nvim_buf_get_name(buf)
+
+						if name:match("^gitsigns://") then
+							vim.api.nvim_win_close(win, true)
+							vim.cmd("diffoff!")
+							return
+						end
+					end
+
+					gitsigns.diffthis()
+				end, "[o]pen/close [d]iff")
 			end,
 		},
 	},
