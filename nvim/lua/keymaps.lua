@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "[S]plit [h]orizontal" 
 -- Oil
 vim.keymap.set("n", "<leader>e", function()
 	require("oil").open(vim.fn.expand("%:p:h"))
-end, { desc = "Open Oil (current file dir)" })
+end, { desc = "Oil: Open current file directory" })
 
 -- Harpoon
 local harpoon = require("harpoon")
@@ -45,27 +45,27 @@ harpoon:setup()
 
 vim.keymap.set("n", "<leader>a", function()
 	harpoon:list():add()
-end)
+end, { desc = "Harpoon: Add file" })
 
 vim.keymap.set("n", "<leader>h", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, { desc = "Harpoon: Toggle menu" })
 
 vim.keymap.set("n", "th", function()
 	harpoon:list():select(1)
-end)
+end, { desc = "Harpoon file 1" })
 vim.keymap.set("n", "tj", function()
 	harpoon:list():select(2)
-end)
+end, { desc = "Harpoon file 2" })
 vim.keymap.set("n", "tk", function()
 	harpoon:list():select(3)
-end)
+end, { desc = "Harpoon file 3" })
 vim.keymap.set("n", "tl", function()
 	harpoon:list():select(4)
-end)
+end, { desc = "Harpoon file 4" })
 vim.keymap.set("n", "t;", function()
 	harpoon:list():select(5)
-end)
+end, { desc = "Harpoon file 5" })
 
 -- Fuzzy Finder
 local fzf = require("fzf-lua")
